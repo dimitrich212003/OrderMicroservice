@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package com.orders.gateway;
+
+message Order {
+  string id = 1;
+  string userId = 2;
+  double amount = 3;
+  string orderDate = 4;
+}
+
+// Запросы для различных операций
+message GetOrderRequest {
+  string id = 1; // ID заказа, который нужно получить
+}
+
+message ModifyOrderRequest {
+  string userId = 1;
+  double amount = 2;
+}
+
+message DeleteOrderRequest {
+  string id = 1;
+}
+
+message OrderResponse {
+  Order order = 1;
+}
+
+message DeleteOrderResponse {
+  string id = 1;
+}
+
+// Сервис
+service OrderService {
+  // Получить заказ
+  rpc GetOrder (GetOrderRequest) returns (OrderResponse);
+
+  // Создать заказ
+  rpc CreateOrder (ModifyOrderRequest) returns (OrderResponse);
+
+  // Обновить заказ
+  rpc UpdateOrder (ModifyOrderRequest) returns (OrderResponse);
+
+  // Удалить заказ
+  rpc DeleteOrder (DeleteOrderRequest) returns (DeleteOrderResponse);
+}
