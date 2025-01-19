@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 @Configuration
 public class GrpcClientConfig {
 
-    @Value("${grpc.server.host:localhost}")
+    @Value("${grpc.server.host:domain}")
     private String host;
 
     @Value("${grpc.server.port:9090}")

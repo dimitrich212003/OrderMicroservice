@@ -2,13 +2,13 @@
 grpc:
   client:
     local-grpc-server:
-      address: "static://localhost:9090"
+      address: "static://domain:9090"
       enable-keep-alive: true
 
 #RabbitMQ properties
 spring:
   rabbitmq:
-    host: localhost
+    host: rabbitmq
     virtual-host: /
     password: guest
     username: guest
@@ -16,6 +16,23 @@ spring:
 
 #Redis properties
   redis:
-    host: localhost
+    host: redis
     port: 6379
+
+logging:
+  level:
+    root: INFO
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+  endpoint:
+    prometheus:
+      enabled: true
 
