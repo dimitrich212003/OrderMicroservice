@@ -32,3 +32,25 @@
 
 mvn clean install -DskipTests
 docker-compose up -d --build 
+
+mongosh
+
+
+use admin
+db.createUser({
+user: "admin",
+pwd: "adminpassword",
+roles: [
+{ role: "userAdminAnyDatabase", db: "admin" }, // Управление пользователями
+{ role: "readWriteAnyDatabase", db: "admin" }  // Чтение и запись в любую базу данных
+]
+})
+
+use my_database
+db.createUser({
+user: "user",
+pwd: "userpassword",
+roles: [
+{ role: "readWrite", db: "my_database" } // Права на чтение и запись в my_database
+]
+})
